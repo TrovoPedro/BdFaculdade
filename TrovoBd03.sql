@@ -282,8 +282,72 @@ select * from curso;
 select coordenador from curso;
 
 select * from curso 
-    
+	where sigla = 'ads';
 
+select * from curso order by nome;
+
+select * from curso order by coordenador desc;
+
+select * from curso 
+	where nome like 'C%';
     
+select * from curso
+	where nome like '%o';
+    
+select * from curso 
+	where nome like '_i%';
+
+select * from curso 
+	where nome like '%a_';
+
+drop table curso;
+
+create table revista(
+  idRevista int primary key auto_increment,
+  nome varchar(40),
+  categoria varchar(30)
+);
+
+insert into revista (nome) values
+  ('Veja'),
+  ('Oul'),
+  ('Thrasher'),
+  ('Vogue');
+
+select * from revista;
+
+update revista set categoria = 'Noticia' 
+	where idRevista= '1';
+update revista set categoria = 'Noticia' 
+	where idRevista= '2';
+update revista set categoria = 'Skate' 
+	where idRevista= '3';
+update revista set categoria = 'Moda' 
+	where idRevista= '4';
+
+select * from revista;
+
+insert into revista (nome, categoria) values
+  ('PlayBoy', 'Adulto'), 
+  ('A Sentinela', 'Religioso'),
+  ('Despertai!', 'Religioso');
+  
+select * from revista;
+
+desc revista;
+
+alter table revista
+modify categoria varchar(40);
+
+desc revista;
+
+alter table revista 
+add periodicidade varchar(15);
+
+select * from revista;
+ alter table revista
+  drop column periodicidade;
+
+
 
 
