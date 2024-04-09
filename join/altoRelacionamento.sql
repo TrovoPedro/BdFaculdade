@@ -1,60 +1,55 @@
-create database alunoProjeto;
+create database faculdade;
 
-use alunoProjeto;
-
-create table aluno(
-	raAluno int primary key not null,
-    nomeAluno varchar(45),
-    telefone char(11),
-    fkProjeto int,
-    fkAlunoRep int
-);
+use faculdade;
 
 create table projeto(
-	idProjeto int primary key not null auto_increment,
+	idProjeto int primary key auto_increment,
     nomeProjeto varchar(45),
-    descProjeto varchar(150)
+    descricao varchar(45)
 );
 
-alter table aluno
-	add constraint fkProjetoAluno foreign key(fkProjeto)
-	references projeto(idProjeto);
-    
-alter table aluno
-	add constraint fkAlunoRepresentante foreign key(fkAlunoRep)
-	references aluno(raAluno);
-    
-insert into aluno (raAluno, nomeAluno, telefone)values 
-	(090990, "Pedro Trovo", "11986785493"),
-	(090231, "José Bonifácio", "11912332457");
-    
-insert into projeto values 
-	(default, "Sprint1", "Entregar os projetos pedidos pelo professor"),
-	(default, "Sprint2", "Entregar os projetos pedidos pelo professor");
-    
-update aluno set fkProjeto = 1
-	where raAluno = 90231;
-    
-update aluno set fkProjeto = 2
-	where raAluno = 90990;
-    
-update aluno set fkAlunoRep = 90231
-	where raAluno = 90990;
-    
-update aluno set fkAlunoRep = 90990
-	where raAluno = 90231;
+create table aluno(
+	ra char(8) primary key,
+    nomeAluno varchar(45),
+    telefone varchar(11),
+    fkProjeto int,
+    constraint fkProjetoAluno
+		foreign key(fkProjeto) 
+		references projeto (idProjeto),
+    fkRepresentante char(8),
+    constraint fkRepresentanteAluno
+		foreign key(fkRepresentante)
+        references aluno (ra)
+);
 
-select * from aluno;
+insert into projeto (nomeProjeto, descricao) values
+	('MorangoTech', 'Solução para monitorar morangos'),
+	('AcquaTech', 'Solução para monitorar aquários'),
+	('ServerTemp', 'Solução para monitorar servidores');
+    
 select * from projeto;
 
-select * from aluno join projeto
-	on idProjeto = fkProjeto;
+insert into aluno (ra, nomeAluno, telefone, fkProjeto, fkRepresentante) values
+	('0124001', 'Pedro', '912345678', 1, null),
+	('0124002', 'Rodolfo', '123456789', 1, '0124001'),
+	('0124003', 'Alberto', '987654321', 1, '0124001'),
+	('0124004', 'Diego', '78965432', 2, null),
+	('0124005', 'Cluadio', '21345678', 2, '0124004'),
+	('0124006', 'Fernando', '43215678', 2, '0124004'),
+	('0124007', 'Fernanda', '21345678', 3, null),
+	('0124008', 'Mauricia', '65478354', 3, '0124007'),
+	('0124009', 'Cluadia', '56342788', 3, '0124007');
     
-select representado.* from aluno as representado join aluno as representante
-	on representado.raAluno = representante.fkAlunoRep;
-    
+select * from aluno;
+
 select * from aluno join projeto
-	on idProjeto = fkProjeto
-	where nomeProjeto = "Sprint1";
+	on fkProjeto = idProjeto;
 
-
+select aluno.nomeAluno as Nome,
+	projeto.nomeProjeto as Projeto
+	from aluno join projeto 
+		on fkProjeto = idProjeto;
+        
+select * from aluno as representante
+	join aluno as representado
+		on representado.ra = representante.ra;
