@@ -3,13 +3,13 @@ create database faculdade;
 use faculdade;
 
 create table projeto(
-	idProjeto int primary key auto_increment,
+    idProjeto int primary key auto_increment,
     nomeProjeto varchar(45),
     descricao varchar(45)
 );
 
 create table aluno(
-	ra char(8) primary key,
+    ra char(8) primary key,
     nomeAluno varchar(45),
     telefone varchar(11),
     fkProjeto int,
