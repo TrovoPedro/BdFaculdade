@@ -42,6 +42,6 @@ insert into dependente values
 	(1, 1, 'Zeca', 'pai', '1990-01-01'),
 	(2, 1, 'Leoncio', 'avô', '1960-05-01'),
 	(1, 2, 'Mamãe Smurf', 'mãe', '1990-10-10');
-
-
-
+    
+select * from funcionario join dependente
+	on fkFunc = idFunc;
