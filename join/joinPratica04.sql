@@ -68,14 +68,8 @@ FROM pets tp
 		WHERE tc.cliente_id = 2;
         
 DELETE FROM pets 
-	WHERE pet_id = 1;
+	WHERE pet_id = 101;
     
 SELECT * FROM pets;
 
-
-
-
-
-
-
-
+alter table pets auto_increment = 101;
